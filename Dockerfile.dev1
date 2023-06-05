@@ -1,0 +1,15 @@
+# The base image is node
+FROM node
+WORKDIR /app    
+# copy the package.json file to /app
+# this takes advantage of layer caching in Docker
+COPY package.json .   
+# install the dependencies
+RUN npm install
+# copy the rest of the files to /app 
+COPY . .
+# expose port 3000 (this command has no change on the final image, it is used just as information)
+EXPOSE 3000
+# start the app 
+CMD ["npm", "start"]
+
